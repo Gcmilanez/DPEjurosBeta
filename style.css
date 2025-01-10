@@ -1,0 +1,206 @@
+html, body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    min-height: 100Vh;
+    background: linear-gradient(#ffffff, #e1ffed);
+    overflow-y: auto; /* Habilita rolagem vertical se necessário */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave para iPhone */
+}
+
+fieldset{
+    display: flex;
+    width: 93%;
+    flex-direction: column;
+    padding: 1rem;
+    justify-content: left;
+    align-items: left;
+    margin: 1rem;
+    border-width: 2px;
+    border-color: #186c4c;
+    }
+
+legend{
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0px;
+}
+
+input,select{
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border-width: 1px;
+    background-color: #e1ece6;
+    font-size: 1.3rem;
+    color:#1d1d1d;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 90%;
+    transition: .5s;
+}
+
+input:hover,select:hover{
+    background-color: #f3fcf7;
+}
+
+::placeholder{
+    color:rgb(173, 180, 172);
+    opacity:100%;
+    font-style: italic;
+    font-size: 1.0rem;
+    }
+
+label{
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: none;
+}
+
+#label-tldr {
+    background-color: #dbdbdb;
+    opacity: 100%;
+    text-decoration-line: none;
+    color: #00452b;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    padding: 0.3rem 0rem 0.3rem 4rem;
+    margin-top: 10px;
+    border-radius: 2rem;
+    border-color: #000000 !important;
+    border-style: dashed;
+    border-width: 1px;
+}
+.aguarda {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: grey;
+    text-indent: 2rem;
+    margin-top: 10px;
+}
+.contratual {
+    margin: 0.2rem;
+    background-color: #e1ece6;
+    color: #1d1d1d;
+    width: 80%;
+    min-width: 100px;
+}
+
+.banco-central {
+    margin: 0.2rem;
+    background-color: #f7ffd1;
+    color: #2f6b35;
+    width: 80%;
+    min-width: 100px;
+}
+
+.banco-central-limit30 {
+    margin: 0.2rem;
+    width: 80%;
+    background-color: #d6f5d3;
+    color: #205c3b;
+    min-width: 100px;
+}
+
+.banco-central-limit50 {
+    margin: 0.2rem;
+    width: 80%;
+    background-color: #accb98;
+    color: #000000;
+    min-width: 100px;
+}
+
+.tabelajuros {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 1px;
+    border-style: solid;
+    border-width: 0px;
+    text-align: center;
+}
+.conclus {
+    margin-bottom: 5px;
+    background: none;
+    color: rgb(14, 2, 2);
+    font-size: 1.4rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 100%;
+    border-style: none;
+    border-width: 0px;
+    text-align: justify; 
+}
+.botaoconclusao{
+    background-color: black;
+    border-radius: 0px;
+}
+.tldr{
+    border-radius: 0px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    background: none !important;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-width: 0px;
+    word-wrap: break-word;
+    white-space: normal;   
+}
+
+.valor-negativo{
+    background-color: #ce7575;
+}
+.footer {
+    margin-top: 0px;
+    font-size: 14px;
+    text-align: center;
+    color: #555555;
+}
+.footer-table {
+        margin: 0 auto; /* Centraliza a tabela horizontalmente */
+        table-layout: fixed; /* Garante que as colunas tenham largura fixa */
+        padding-top: 1rem;
+}
+    
+.footer-table td {
+        vertical-align: middle; /* Alinha verticalmente no meio */
+        padding: 0.5rem;
+}
+.logo {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+.logo-footer {
+    width: 290px; /* Ajuste o tamanho da logo conforme necessário */
+}
+.disclaimer {
+    margin-left: 0rem;
+    font-size: 0.8rem;
+    font-weight: normal;
+    width: 90%;
+    text-align: justify;
+    margin-left: 2rem;
+    line-height: 90%;
+}
+
+.submit{
+    background-color: #006400;  /* Verde escuro */
+    color: white;               /* Texto branco */
+    font-weight: bold;          /* Negrito */
+    font-size: 0.8rem;          /* Fonte pequena */
+    border: none;               /* Sem borda */
+    padding: 5px 10px;          /* Espaçamento interno */
+    margin-top: 10px;           /* Espaçamento superior */
+    border-radius: 5px;         /* Borda arredondada */
+    cursor: pointer;            /* Cursor de mão */
+    
+}
+
+.submit.active {
+    transform: scale(0.70); /* Diminui levemente o botão */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Adiciona um leve sombreamento */
+    background-color: #0056b3; /* Cor mais escura no clique */
+
+}

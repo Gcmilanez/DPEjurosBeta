@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Teste preliminar revisional - meus juros são abusivos?</title>
+    <style>
+        /* Estilos para impressão */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                line-height: 1.4;
+                align-items: left;
+                height: auto;
+                background-color: #fff !important;
+                background: #fff !important;
+                                        
+           
+            }
+            * {
+                color: #000 !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+                border-color: #000;
+                border-width: 1px;
+                align-items: left;
+                border-radius: 0rem;
+            }
+            input,input:hover,select:hover,select{
+              font-size: 1.2rem;
+              border-width: 0px;
+              border-color: grey;
+              box-shadow: none;
+              background-color: rgb(235, 235, 235) !important;
+            }
+            fieldset{
+              border-width: 2px;
+              border-color: rgb(167, 167, 167);
+              border-radius: 1rem;
+            }
+            .no-print {
+                display: none !important;
+
+            }
+            .disclaimer {
+                font-size: 0.8rem;
+            }   
+            .btn-imprimir {
+                display: none;
+            }
+            .tldr {
+                font-size: 1.15rem;
+                color: black;
+                font-weight: bold;
+                border-style: none;
+                border-width: 0px;            
+            }
+            .conclus {
+                font-size: 0.85rem;
+                color: #272727;            
+            }
+            .banco-central {
+                background-color: #e0e0e0 !important;
+            }
+            #label-tldr {
+                background-color: #585858 !important;
+                opacity: 100%;
+                text-decoration-line: none;
+                color: #ffffff !important;
+                font-weight: bold !important;
+                letter-spacing: 2px;
+                padding: 0.3rem 0rem 0.3rem 4rem;
+                margin-top: 10px;
+                border-radius: 2rem;
+                border-color: #5f5f5f !important;
+                border-style: dashed;
+                border-width: 0px;
+            }
+            .banco-central-limit20 {
+                background-color: #d4d4d4 !important;
+            }
+
+            .banco-central-limit50 {
+                background-color: #cacaca !important;
+            }
+            label{
+                font-size: 0.9rem;
+                font-weight: normal;
+                text-decoration: none;
+                text-decoration-color: #e9e9e9;
+            }
+            .tabelajuros {
+                font-size: 1rem;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 2mm !important;
+                padding: 0mm !important;
+            }
+          }
+        #pdf-template {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <fieldset>
+            <legend>OS JUROS DO MEU CONTRATO ESTÃO ABUSIVOS?<div style="font-size: 0.9rem; font-weight: normal;">TESTE DE ABUSIVIDADE DE JUROS PRÉVIO AO CÁLCULO REVISIONAL</div></legend>
+            <p style="margin-top: 0px;">
+              <label for="ip_assistido">NOME <span class="no-print" style="font-size: 0.9rem; font-weight: normal;">(opcional para consultas)</span><br>
+              </label>
+              <input type="text" id="ip_assistido" placeholder="NOME COMPLETO (opcional para consultas)">
+              
+              <label for="ip_cpf"><br>CPF <span class="no-print" style="font-size: 0.9rem; font-weight: normal;">(opcional para consultas)</span><br>
+              </label>
+              
+              <input type="text" id="ip_cpf" placeholder="000.000.000-00 (opcional para consultas)" maxlength="14">
+
+              <label for="ip_refcontrato"><br>NÚMERO DO CONTRATO / BANCO <span class="no-print" style="font-size: 0.9rem; font-weight: normal;">(opcional para consultas)</span> <br>
+              </label>
+              
+              <input type="text" id="ip_refcontrato" placeholder="contrato #2312321 com o Banco Gringotts (opcional para consultas)">
+              
+              <label for="ip_data"><br>MÊS EM QUE CELEBRADO O EMPRÉSTIMO<br></label>
+              <input type="month" id="ip_data">
+              
+              <label for="ip_modalidade"><br>MODALIDADE<br>
+              </label>
+              <select id="ip_modalidade">
+                <optgroup label="PRINCIPAIS PESSOA FÍSICA">
+                    <option value="nihil">SELECIONE SEU TIPO DE CONTRATO</option>
+                    <option value="25463">CHEQUE ESPECIAL (25463)</option>
+                    <option value="25477">CARTÃO DE CRÉDITO - rotativo (25477)</option>
+                    <option value="25478">CARTÃO DE CRÉDITO - parcelado (25478)</option>
+                    <option value="25468">CONSIGNADO aposentados e pensionistas INSS (25468)</option>
+                    <option value="25467">CONSIGNADO servidor público (25467)</option>
+                    <option value="25466">CONSIGNADO empregado privado (25466)</option>
+                    <option value="25464">CRÉDITO PESSOAL não-consignado (25464)</option>
+                    <option value="25465">CRÉDITO não-consignado para REFINANCIAMENTO de outras dívidas (25465)</option>
+                    <option value="25472">CRÉDITO para aquisição de outros bens (exceto veículos) (25472)</option>
+                    <option value="25471">VEÍCULOS - Alienação Fiduciária PESSOA FÍSICA (25471)</option>
+                </optgroup> 
+                 <optgroup label="SÉRIES MENOS USADAS (PF E PJ)">
+                    <option value="25447">VEÍCULOS aquisição - Alienação Fiduciária para PJ (25447)</option>
+                    <option value="25470">Crédito pessoal total PF (usado para adiantamento 13º salário) (25470)</option>
+                    <option value="25505">Microcrédito destinado a microempreendedores (25505)</option>
+                </optgroup>
+              </select>
+              
+              <label for="ip_taxa_mensal_contratual"><br>
+              </label>
+            </p>
+            <table width="100%" class="tabelajuros">
+              <tbody class="tabelajuros">
+                <tr>
+                  <td width="20%" style="font-size: 1.5rem; text-decoration: underline;">TAXA (%)</td>
+                  <td width="20%">CONTRATUAL</td>
+                  <td width="20%">MÉDIA<BR>BACEN</td>
+                  <td width="20%">PARÂMETRO ABUSIVIDADE 20%</td>
+                  <td width="20%">PARÂMETRO ABUSIVIDADE 50%</td>
+                </tr>
+                <tr>
+                  <td width="20%">ao mês</td>
+                  <td width="20%"><input type="number" id="ip_taxa_mensal_contratual" class="contratual" placeholder="DIGITE AQUI" value = 'nihil'></td>
+                  <td width="20%"><input type="number" id="ip_taxa_mensal_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                  <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                  <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit50" class="banco-central-limit50" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                </tr>
+                <tr>
+                  <td width="20%">ao ano</td>
+                  <td width="20%"><input type="number" id="ip_taxa_anual_contratual" class="contratual" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                  <td width="20%"><input type="number" id="ip_taxa_anual_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                  <td width="20%"><input type="number" id="ip_taxa_anual_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                  <td width="20%"><input type="number" id="ip_taxa_anual_bacen_limit50" class="banco-central-limit50" readonly placeholder="automático" style="cursor: not-allowed;"></td>
+                </tr>
+              </tbody>
+            </table>
+            
+            
+				       
+               
+        <label for="tldr" id="label-tldr">CONCLUSÃO<br></label>
+        <div id="aguarda" class="aguarda no-print">(será mostrada após a inserção das informações pelo usuário - esta informação sumirá quando o relatório for impresso)</div>
+        <output id="tldr" name="tldr" readonly class="tldr"></output>
+        <output id="conclus" name="conclus" readonly class="conclus"></output>
+        <button type= "button" class="submit no-print" onclick="imprimirSemReiniciar(event)"> GERAR RELATÓRIO (IMPRIMIR / SALVAR COMO PDF)</button> 
+        </fieldset>
+              
+    </form>
+                  <div class="disclaimer"><B>OBS:</B> As taxas médias do Banco Central do Brasil são obtidas diretamente por esta aplicação, através de API disponibilizada SGS-BACEN na plataforma <a href="https://dadosabertos.bcb.gov.br/dataset">Dados Abertos</a>, refletindo exatamente as séries temporais acessíveis pela internet para idêntico mês de contratação e tipo de produto financeiro. Em caso de alguma discrepância, pedimos informar a cate@defensoria.rs.def.br .
+                  <br><br><b> OBS2:</b> A análise jurídica da abusividade dos juros de determinado contrato deve ser aperfeiçoada por operador do Direito, servindo a presente ferramenta como mera forma de facilitar o acesso aos dados do Sistema Gerenciador de Séries Temporais do Banco Central do Brasil, diante de sua hermética interface ao público leigo. Pode haver outros fatores para além da mera abusividade quantitativa dos juros contratuais que ensejem ação revisional, devendo tal análise ser feita por profissional especializado.</div>  
+        <div class="footer" >
+          <table class="footer-table">
+              <tr>
+                  <td>
+                      <a href="https://www.defensoria.rs.def.br" target="_blank">
+                          <img src="https://www.defensoria.rs.def.br/themes/modelo-hotsite/images/logos/logo.png" alt="Logo da Defensoria Pública" class="logo-footer">
+                      </a>
+                  </td>
+                  <td class="footer-text">
+                  <div style="font-weight: normal">DESENVOLVIDO E FORNECIDO PELO <B>CATE - CÁLCULOS</B><BR> DA DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL</div><div class="footer" style="font-size: 80%">v1.4.1 de 30/10/2024.</div><div class="footer no-print" style="font-size: 80%; margin-top: 0px;"><br><b>Desenvolvimento:</b> Defensor Público FELIPE DRUMMOND usando ChatGPT-4o<div style="font-size: 90%; font-style: italic;">Agradecemos a Yan Christino pela versão inicial da ferramenta com uso da API do BACEN!</div><b>Sugestões? </b><a href="mailto: cate@defensoria.rs.def.br">E-mail</a></div></p>
+                  </td>
+              </tr>
+          </table>
+      </div>
+      
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" type="text/javascript"></script>
+    <script src="masks.js"></script>
+    <script src="scriptsimplificado.js"></script>
+    
+</body>
+</html>
