@@ -226,8 +226,6 @@ function compararTaxas() {
 
     // Caso os valores forem inválidos, retorna
     if ((isNaN(taxaMensalContratual) || isNaN(taxaMensalBacen)) && taxaMensalContratual < 0.0) {
-        CONCLUS = 'Por favor, insira valores válidos para as taxas.';
-        TLDR = '';
         return;
     }
 

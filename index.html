@@ -109,8 +109,8 @@
 
     <form>
         <fieldset>
-            <legend>OS JUROS DO MEU CONTRATO ESTÃO ABUSIVOS?<div style="font-size: 0.9rem; font-weight: normal;">TESTE DE ABUSIVIDADE DE JUROS PRÉVIO AO CÁLCULO REVISIONAL</div></legend>
-            <p style="margin-top: 0px;">
+            <legend>OS JUROS DO MEU CONTRATO ESTÃO ABUSIVOS?<div style="font-size: 0.9rem; font-weight: normal; ">TESTE DE ABUSIVIDADE DE JUROS PRÉVIO AO CÁLCULO REVISIONAL</div></legend>
+            <p style="margin-top: 0px; ">
               <label for="ip_assistido">NOME <span class="no-print" style="font-size: 0.9rem; font-weight: normal;">(opcional para consultas)</span><br>
               </label>
               <input type="text" id="ip_assistido" placeholder="NOME COMPLETO (opcional para consultas)">
@@ -158,20 +158,20 @@
               <tbody class="tabelajuros">
                 <tr>
                   <td width="20%" style="font-size: 1.5rem; text-decoration: underline;">TAXA (%)</td>
-                  <td width="20%">CONTRATUAL</td>
-                  <td width="20%">MÉDIA<BR>BACEN</td>
-                  <td width="20%">PARÂMETRO ABUSIVIDADE 20%</td>
-                  <td width="20%">PARÂMETRO ABUSIVIDADE 50%</td>
+                  <td width="20%" style= "padding-left: 3%;">CONTRATUAL</td>
+                  <td width="20%" style= "padding-left: 1%; text-align: center;">MÉDIA<br>BACEN</td>
+                  <td width="20%" style= "padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 20%</td>
+                  <td width="20%" style= "padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 50%</td>
                 </tr>
                 <tr>
-                  <td width="20%">ao mês</td>
+                  <td width="20%" style= "font-size: 1.3rem; padding-left: 0.5%;  padding-right: 5%;">ao mês</td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_contratual" class="contratual" placeholder="DIGITE AQUI" value = 'nihil'></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit50" class="banco-central-limit50" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                 </tr>
                 <tr>
-                  <td width="20%">ao ano</td>
+                  <td width="20%" style= "font-size: 1.3rem; padding-left: 0.5%;">ao ano</td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_contratual" class="contratual" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
@@ -184,7 +184,6 @@
 				       
                
         <label for="tldr" id="label-tldr">CONCLUSÃO<br></label>
-        <div id="aguarda" class="aguarda no-print">(será mostrada após a inserção das informações pelo usuário - esta informação sumirá quando o relatório for impresso)</div>
         <output id="tldr" name="tldr" readonly class="tldr"></output>
         <output id="conclus" name="conclus" readonly class="conclus"></output>
         <button id= "botao_conclusao" type= "button" class="submit no-print" onclick="getResposta()"> GERAR CONCLUSÃO</button> 
@@ -202,7 +201,7 @@
                       </a>
                   </td>
                   <td class="footer-text">
-                  <div style="font-weight: normal">DESENVOLVIDO E FORNECIDO PELO <B>CATE - CÁLCULOS</B><BR> DA DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL</div><div class="footer" style="font-size: 80%">v1.4.1 de 30/10/2024.</div><div class="footer no-print" style="font-size: 80%; margin-top: 0px;"><br><b>Desenvolvimento:</b> Defensor Público FELIPE DRUMMOND usando ChatGPT-4o<div style="font-size: 90%; font-style: italic;">Agradecemos a Yan Christino pela versão inicial da ferramenta com uso da API do BACEN!</div><b>Sugestões? </b><a href="mailto: cate@defensoria.rs.def.br">E-mail</a></div></p>
+                  <div style="font-weight: normal">DESENVOLVIDO E FORNECIDO PELO <B>CATE - CÁLCULOS</B><BR> DA DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL</div><div class="footer" style="font-size: 80%">v1.4.1 de 30/10/2024.</div><div class="footer no-print" style="font-size: 80%; margin-top: 0px;"><br><b>Desenvolvimento:</b> Defensor Público FELIPE DRUMMOND e GIOVANNI MILANEZ<div style="font-size: 90%; font-style: italic;">Agradecemos a Yan Christino pela versão inicial da ferramenta com uso da API do BACEN!</div><b>Sugestões? </b><a href="mailto: cate@defensoria.rs.def.br">E-mail</a></div></p>
                   </td>
               </tr>
           </table>
