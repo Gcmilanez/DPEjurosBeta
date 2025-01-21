@@ -44,6 +44,13 @@ MES_EMPRESTIMO.addEventListener('change', (event) => {
     verificarEChamarGetTaxa(event)
 });
 
+ANO_EMPRESTIMO.addEventListener('input', function(event) {
+    let valor = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (valor.length > 4) {
+        valor = valor.slice(0, 4); // Garante que o ano tenha no máximo 4 dígitos
+    }
+    this.value = valor;
+});
 
 ANO_EMPRESTIMO.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === 'Tab'){
@@ -79,7 +86,7 @@ MES_EMPRESTIMO.addEventListener('blur', function(event) {
 MES_EMPRESTIMO.addEventListener("input", function () {
     let valor = parseInt(this.value, 10);
     if (isNaN(valor)) return;
-    
+
     if (valor < 1) this.value = 1;
     if (valor > 12) this.value = 12;
 });
