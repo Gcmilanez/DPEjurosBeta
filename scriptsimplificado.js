@@ -1,6 +1,7 @@
 // Referenciando os elementos principais
 let MODALIDADE = document.getElementById('ip_modalidade');
-let DATA_EMPRESTIMO = document.getElementById('ip_data');
+let ANO_EMPRESTIMO = document.getElementById('ip_ano')
+let MES_EMPRESTIMO = document.getElementById('ip_mes')
 let TAXA_MENSAL_CONTRATUAL = document.getElementById('ip_taxa_mensal_contratual');
 let TAXA_ANUAL_CONTRATUAL = document.getElementById('ip_taxa_anual_contratual');
 let TAXA_MENSAL_BACEN = document.getElementById('ip_taxa_mensal_bacen');
@@ -9,6 +10,8 @@ let TAXA_ANUAL_BACEN_LIMIT50 = document.getElementById('ip_taxa_anual_bacen_limi
 let TAXA_MENSAL_BACEN_LIMIT50 = document.getElementById('ip_taxa_mensal_bacen_limit50');
 let TAXA_ANUAL_BACEN_LIMIT20 = document.getElementById('ip_taxa_anual_bacen_limit20');
 let TAXA_MENSAL_BACEN_LIMIT20 = document.getElementById('ip_taxa_mensal_bacen_limit20');
+
+
 let CONCLUS = '';
 let TLDR = '';
 
@@ -16,7 +19,7 @@ let TLDR = '';
 let data = '';
 
 // Adicionando event listeners para as mudanças de modalidade e data
-MODALIDADE.addEventListener('input', (event) => {
+MODALIDADE.addEventListener('change', (event) => {
     MODALIDADE.blur();
 });
 
@@ -31,18 +34,54 @@ MODALIDADE.addEventListener('keydown', function(event) {
     }
 });
 
-DATA_EMPRESTIMO.addEventListener('input', (event) => {
-    if (MODALIDADE.value != 'nihil'){
-        get_taxa(event, data);
-        compararTaxas();
-    }
+
+ANO_EMPRESTIMO.addEventListener('change', (event) => {
+    verificarEChamarGetTaxa(event)
 });
 
-DATA_EMPRESTIMO.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Evita comportamento padrão (como envio de formulário)
-        this.blur(); // Força o disparo do evento blur
+
+MES_EMPRESTIMO.addEventListener('change', (event) => {
+    verificarEChamarGetTaxa(event)
+});
+
+
+ANO_EMPRESTIMO.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === 'Tab'){
+        ANO_EMPRESTIMO.blur(); // Força o disparo do evento blur
+        }
+});
+
+ANO_EMPRESTIMO.addEventListener('blur', function(event) {
+        if (this.value.length < 4) {
+            this.style.borderColor = 'red'; // Deixa a borda vermelha
+        } else {
+            this.style.borderColor = 'black';
+            verificarEChamarGetTaxa(event);
+        }
+        
+});
+
+MES_EMPRESTIMO.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === 'Tab'){
+        MES_EMPRESTIMO.blur(); // Força o disparo do evento blur
+        }
+});
+
+MES_EMPRESTIMO.addEventListener('blur', function(event) {
+    if (this.value.length == 1) {
+        this.value = '0' + this.value[0];
     }
+    verificarEChamarGetTaxa(event);
+});
+
+
+
+MES_EMPRESTIMO.addEventListener("input", function () {
+    let valor = parseInt(this.value, 10);
+    if (isNaN(valor)) return;
+    
+    if (valor < 1) this.value = 1;
+    if (valor > 12) this.value = 12;
 });
 
 document.getElementById('ip_cpf').addEventListener('input', function() {
@@ -59,7 +98,7 @@ document.getElementById('ip_cpf').addEventListener('input', function() {
 });
 
 document.getElementById('ip_cpf').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === 'Tab') {
         this.blur(); // Força o disparo do evento blur
     }
 });
@@ -75,6 +114,7 @@ document.getElementById('ip_refcontrato').addEventListener('keydown', function(e
         this.blur(); // Força o disparo do evento blur
     }
 });
+
 
 // Evento DOMContentLoaded para garantir que os elementos estão carregados
 document.addEventListener('DOMContentLoaded', () => {
@@ -119,7 +159,7 @@ function imprimirSemReiniciar(event) {
         return;  
     }
 
-    if (!DATA_EMPRESTIMO.value){
+    if (!ANO_EMPRESTIMO.value || !MES_EMPRESTIMO.value){
         alert('Insira uma data.');
         event.preventDefault(); // Evita o comportamento padrão do botão (reiniciar o formulário)
         return;
@@ -154,26 +194,24 @@ function get_taxa(event, data){
     resetTaxa();
 
     // Se a api do banco retornar uma data válida, faz a pesquisa através da data
-    if(data){
-        data_para_busca = `${DATA_EMPRESTIMO.value}-01`.split('-');
+    if(data && ANO_EMPRESTIMO.value.length == 4){
+        data_para_busca = `${ANO_EMPRESTIMO.value}-${MES_EMPRESTIMO.value}`;
+        data_para_busca = `${data_para_busca}-01`.split('-');
         data_para_busca = new Date(data_para_busca[0], data_para_busca[1] - 1, data_para_busca[2]).toLocaleDateString('pt-BR');
-        let filtered_data = data.filter(row => row.data === data_para_busca)[0];
-         
+        let filtered_data = data.filter(row => row.data === data_para_busca)[0];;
 
-        if(filtered_data.valor){
-            // Atualizando os campos de taxas médias e limites
-            const valorTaxaMensal = filtered_data.valor;
-            TAXA_MENSAL_BACEN.value = valorTaxaMensal;
-            TAXA_ANUAL_BACEN.value = calcularTaxaAnualContratual(valorTaxaMensal);
-            
-            // Cálculo dos limites de 50% e 30%
-            TAXA_MENSAL_BACEN_LIMIT50.value = (valorTaxaMensal * 1.5).toFixed(2);
-            TAXA_ANUAL_BACEN_LIMIT50.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT50.value);
-            
-            TAXA_MENSAL_BACEN_LIMIT20.value = (valorTaxaMensal * 1.2).toFixed(2);
-            TAXA_ANUAL_BACEN_LIMIT20.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT20.value);
-        }else{
-            alert("Data não encontrada.")
+        if(filtered_data){
+                // Atualizando os campos de taxas médias e limites
+                const valorTaxaMensal = filtered_data.valor;
+                TAXA_MENSAL_BACEN.value = valorTaxaMensal;
+                TAXA_ANUAL_BACEN.value = calcularTaxaAnualContratual(valorTaxaMensal);
+                
+                // Cálculo dos limites de 50% e 30%
+                TAXA_MENSAL_BACEN_LIMIT50.value = (valorTaxaMensal * 1.5).toFixed(2);
+                TAXA_ANUAL_BACEN_LIMIT50.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT50.value);
+                
+                TAXA_MENSAL_BACEN_LIMIT20.value = (valorTaxaMensal * 1.2).toFixed(2);
+                TAXA_ANUAL_BACEN_LIMIT20.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT20.value);
         }
     }
 }
@@ -196,17 +234,18 @@ async function mudar_modalidade(event) {
         try {
             response = await fetch(`https://api.bcb.gov.br/dados/serie/bcdata.sgs.${MODALIDADE.value}/dados?formato=json`);
             data = await response.json();
-            if (DATA_EMPRESTIMO.value){
-                get_taxa(event, data);
-                if(TAXA_MENSAL_CONTRATUAL.value){
-                    compararTaxas();
-                    }
-            }
-
-        // Caso não encontre os dados do bcb, avisa ao usuário
         }catch (err) {
-            alert(`Dados não encontrados no SGS-BACEN`);
+            alert(`Dados não encontrados no SGS-BACEN: ${err}`);
         }
+        verificarEChamarGetTaxa(event);
+    }
+}
+
+function verificarEChamarGetTaxa(event) {
+    if (ANO_EMPRESTIMO.value && MES_EMPRESTIMO.value && data) {
+        console.log("Todos os dados estão preenchidos. Chamando get_taxa...");
+        get_taxa(event, data);
+        compararTaxas();
     }
 }
 
@@ -305,7 +344,7 @@ function getResposta() {
             return;  
         }
     
-        if (!DATA_EMPRESTIMO.value){
+        if (!ANO_EMPRESTIMO.value || !MES_EMPRESTIMO.value){
             alert('Insira uma data.');
             return;
         }
@@ -351,7 +390,7 @@ function makeFieldsImmutable() {
 
 // Função para tornar todos os campos mutaveis
 function makeFieldsMutable() {
-    const inputs = document.querySelectorAll('input, select, textarea');
+    const inputs = document.querySelectorAll('change, input, select, textarea');
     inputs.forEach(input => {
         if (input.dataset.previousValue !== undefined) {
             input.value = input.dataset.previousValue; 

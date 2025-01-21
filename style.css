@@ -46,6 +46,21 @@ input, select {
     margin-bottom: 1rem;
 }
 
+::placeholder{
+    color:rgb(173, 180, 172);
+    opacity:100%;
+    font-style: italic;
+    font-size: 1.0rem;
+    }
+
+
+    label{
+        font-size: 1.1rem;
+        font-weight: bold;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-decoration: none;
+    }
+
 .contratual{
     margin: 0.8rem;
     width: 90%;

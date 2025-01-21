@@ -124,9 +124,15 @@
               </label>
               
               <input type="text" id="ip_refcontrato" placeholder="contrato #2312321 com o Banco Gringotts (opcional para consultas)">
-              
-              <label for="ip_data"><br>MÊS EM QUE CELEBRADO O EMPRÉSTIMO<br></label>
-              <input type="month" id="ip_data">
+              <label>DATA QUE FOI CELEBRADO O EMPRÉSTIMO</label>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                
+                <label for="year">Ano:</label>
+                <input type="number" id="ip_ano" name="year" min="2000" max="2100" placeholder="AAAA" maxlength="4">
+            
+                <label for="month">Mês:</label>
+                <input type="number" id="ip_mes" name="month" min="1" max="12" placeholder="MM" maxlength="2">
+              </div>
               
               <label for="ip_modalidade"><br>MODALIDADE<br>
               </label>
