@@ -127,11 +127,25 @@
               <label>DATA QUE FOI CELEBRADO O EMPRÉSTIMO</label>
               <div style="display: flex; gap: 10px; align-items: center;">
                 
-                <label for="year">Ano:</label>
-                <input type="number" id="ip_ano" name="year" min="2000" max="2100" placeholder="AAAA" maxlength="4">
-            
-                <label for="month">Mês:</label>
-                <input type="number" id="ip_mes" name="month" min="1" max="12" placeholder="MM" maxlength="2">
+                <label for="ip_mes">Mês:</label>
+                <select id="ip_mes">
+                        <option value="nihil" disabled = true; selected = true;>SELECIONE O MÊS </option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                </select>
+                <label for="ip_ano">Ano:</label>
+                <select id="ip_ano" name="year"></select>
+
               </div>
               
               <label for="ip_modalidade"><br>MODALIDADE<br>
@@ -207,7 +221,7 @@
                       </a>
                   </td>
                   <td class="footer-text">
-                  <div style="font-weight: normal">DESENVOLVIDO E FORNECIDO PELO <B>CATE - CÁLCULOS</B><BR> DA DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL</div><div class="footer" style="font-size: 80%">v1.4.1 de 30/10/2024.</div><div class="footer no-print" style="font-size: 80%; margin-top: 0px;"><br><b>Desenvolvimento:</b> Defensor Público FELIPE DRUMMOND e GIOVANNI MILANEZ<div style="font-size: 90%; font-style: italic;">Agradecemos a Yan Christino pela versão inicial da ferramenta com uso da API do BACEN!</div><b>Sugestões? </b><a href="mailto: cate@defensoria.rs.def.br">E-mail</a></div></p>
+                  <div style="font-weight: normal">DESENVOLVIDO E FORNECIDO PELO <B>CATE - CÁLCULOS</B><BR> DA DEFENSORIA PÚBLICA DO ESTADO DO RIO GRANDE DO SUL</div><div class="footer" style="font-size: 80%">v2.0.0 de 21/01/2025.</div><div class="footer no-print" style="font-size: 80%; margin-top: 0px;"><br><b>Desenvolvimento:</b> Defensor Público FELIPE DRUMMOND e GIOVANNI MILANEZ<div style="font-size: 90%; font-style: italic;">Agradecemos a Yan Christino pela versão inicial da ferramenta com uso da API do BACEN!</div><b>Sugestões? </b><a href="mailto: cate@defensoria.rs.def.br">E-mail</a></div></p>
                   </td>
               </tr>
           </table>

@@ -27,69 +27,22 @@ MODALIDADE.addEventListener('blur', (event) => {
     mudar_modalidade(event);
 });
 
-MODALIDADE.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Evita comportamento padrão (como envio de formulário)
-        this.blur(); // Força o disparo do evento blur
-    }
-});
-
 
 ANO_EMPRESTIMO.addEventListener('change', (event) => {
     verificarEChamarGetTaxa(event)
+    ANO_EMPRESTIMO.blur();
 });
 
 
 MES_EMPRESTIMO.addEventListener('change', (event) => {
     verificarEChamarGetTaxa(event)
+    MES_EMPRESTIMO.blur();
 });
 
-ANO_EMPRESTIMO.addEventListener('input', function(event) {
-    let valor = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    if (valor.length > 4) {
-        valor = valor.slice(0, 4); // Garante que o ano tenha no máximo 4 dígitos
-    }
-    this.value = valor;
+TAXA_MENSAL_CONTRATUAL.addEventListener('change', (event) => {
+    compararTaxas();
 });
 
-ANO_EMPRESTIMO.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' || event.key === 'Tab'){
-        ANO_EMPRESTIMO.blur(); // Força o disparo do evento blur
-        }
-});
-
-ANO_EMPRESTIMO.addEventListener('blur', function(event) {
-        if (this.value.length < 4) {
-            this.style.borderColor = 'red'; // Deixa a borda vermelha
-        } else {
-            this.style.borderColor = 'black';
-            verificarEChamarGetTaxa(event);
-        }
-        
-});
-
-MES_EMPRESTIMO.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' || event.key === 'Tab'){
-        MES_EMPRESTIMO.blur(); // Força o disparo do evento blur
-        }
-});
-
-MES_EMPRESTIMO.addEventListener('blur', function(event) {
-    if (this.value.length == 1) {
-        this.value = '0' + this.value[0];
-    }
-    verificarEChamarGetTaxa(event);
-});
-
-
-
-MES_EMPRESTIMO.addEventListener("input", function () {
-    let valor = parseInt(this.value, 10);
-    if (isNaN(valor)) return;
-
-    if (valor < 1) this.value = 1;
-    if (valor > 12) this.value = 12;
-});
 
 document.getElementById('ip_cpf').addEventListener('input', function() {
     let valor = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
@@ -125,6 +78,7 @@ document.getElementById('ip_refcontrato').addEventListener('keydown', function(e
 
 // Evento DOMContentLoaded para garantir que os elementos estão carregados
 document.addEventListener('DOMContentLoaded', () => {
+    preencherSelecaoAno();
     // Dispara a função compararTaxas ao mudar o valor ou ao perder o foco no campo de taxa contratual
     if (TAXA_MENSAL_CONTRATUAL) {
         // Evento blur (saída do campo)
@@ -199,10 +153,9 @@ function resetTaxa(){
 // Função para calcular as taxas
 function get_taxa(event, data){
     resetTaxa();
-
     // Se a api do banco retornar uma data válida, faz a pesquisa através da data
-    if(data && ANO_EMPRESTIMO.value.length == 4){
-        data_para_busca = `${ANO_EMPRESTIMO.value}-${MES_EMPRESTIMO.value}`;
+    if(data){
+        data_para_busca =  `${ANO_EMPRESTIMO.value}-${MES_EMPRESTIMO.value}`;;
         data_para_busca = `${data_para_busca}-01`.split('-');
         data_para_busca = new Date(data_para_busca[0], data_para_busca[1] - 1, data_para_busca[2]).toLocaleDateString('pt-BR');
         let filtered_data = data.filter(row => row.data === data_para_busca)[0];;
@@ -226,39 +179,85 @@ function get_taxa(event, data){
 // Função para mudar a modalidade
 async function mudar_modalidade(event) {
     data = '';
+    makeFieldsImmutable();
     resetTaxa();
-    // Verifica se a modalidade é 25463 ou 25477, exibe as mensagens e bloqueia a comparação de taxas
-    if (MODALIDADE.value === "25463" || MODALIDADE.value === "25477") {
+    
+    let loadingMessage = document.getElementById('loading-message');
+    if (!loadingMessage) {
+        loadingMessage = document.createElement('div');
+        loadingMessage.id = 'loading-message';
+        loadingMessage.innerHTML = '<div class="spinner"></div><p>Carregando dados, por favor aguarde...</p>';
+        loadingMessage.style.position = 'fixed';
+        loadingMessage.style.top = '50%';
+        loadingMessage.style.left = '50%';
+        loadingMessage.style.transform = 'translate(-50%, -50%)';
+        loadingMessage.style.textAlign = 'center';
+        loadingMessage.style.padding = '10px';
+        loadingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        loadingMessage.style.color = 'white';
+        loadingMessage.style.fontSize = '16px';
+        loadingMessage.style.borderRadius = '5px';
+        loadingMessage.style.zIndex = '1000';
+        document.body.appendChild(loadingMessage);
 
+        let style = document.createElement('style');
+        style.innerHTML = `
+            .spinner {
+                width: 50px;
+                height: 50px;
+                border: 5px solid rgba(255, 255, 255, 0.3);
+                border-top: 5px solid white;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin: auto;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    if (MODALIDADE.value === "25463" || MODALIDADE.value === "25477") {
         CONCLUS = `Infelizmente, os cálculos envolvendo cartão de crédito rotativo e cheque especial costumam envolver maior complexidade, conforme o número de meses em que o consumidor permaneceu em débito com a instituição financeira, de forma que não é possível fazê-lo estaticamente, isto é, pensando apenas nos juros do momento em que a pessoa não pagou a fatura ou entrou no cheque especial. Assim, esta ferramenta não serve para a funcionalidade desejada, sendo aconselhável procurar assistência jurídica para analisar a viabilidade de ação revisional.`;
         TLDR = `DESCULPE, ESTA FERRAMENTA AINDA NÃO SERVE PARA ISSO.`;
+        loadingMessage.remove();
         return;
-
     } 
 
-    // Se é uma modalidade válida, faz a busca dos dados atraves da api do bcb
-    if (MODALIDADE.value != 'nihil'){
+    if (MODALIDADE.value != 'nihil') {
         try {
-            response = await fetch(`https://api.bcb.gov.br/dados/serie/bcdata.sgs.${MODALIDADE.value}/dados?formato=json`);
+            let response = await fetch(`https://api.bcb.gov.br/dados/serie/bcdata.sgs.${MODALIDADE.value}/dados?formato=json`);
             data = await response.json();
-        }catch (err) {
+        } catch (err) {
             alert(`Dados não encontrados no SGS-BACEN: ${err}`);
         }
         verificarEChamarGetTaxa(event);
     }
+    loadingMessage.remove();
+    makeFieldsMutable();
 }
 
+
+
 function verificarEChamarGetTaxa(event) {
-    if (ANO_EMPRESTIMO.value && MES_EMPRESTIMO.value && data) {
-        console.log("Todos os dados estão preenchidos. Chamando get_taxa...");
+    if (ANO_EMPRESTIMO.value != "nihil" && MES_EMPRESTIMO.value != "nihil" && data) {
         get_taxa(event, data);
-        compararTaxas();
+        if(TAXA_MENSAL_CONTRATUAL){
+            compararTaxas();
+        }
     }
 }
 
 // Função para comparar taxas
 function compararTaxas() {
     
+    CONCLUS = '';
+    TLDR = '';
+    document.getElementById('conclus').innerHTML = '';
+    document.getElementById('tldr').value = '';
+
     if (MODALIDADE === "nihil" || MODALIDADE === "25463" || MODALIDADE === "25477") {
         console.log("A função compararTaxas foi bloqueada para a modalidade 'nihil' ou séries proibidas.");
         return;  // Sai da função sem fazer nada
@@ -271,7 +270,7 @@ function compararTaxas() {
     const taxaMensalBacenLimit20 = (taxaMensalBacen * 1.2).toFixed(2);
 
     // Caso os valores forem inválidos, retorna
-    if ((isNaN(taxaMensalContratual) || isNaN(taxaMensalBacen)) && taxaMensalContratual < 0.0) {
+    if ((isNaN(taxaMensalContratual) || isNaN(taxaMensalBacen)) || taxaMensalContratual <= 0.0) {
         return;
     }
 
@@ -363,6 +362,26 @@ function getResposta() {
     }
 }
 
+function preencherSelecaoAno() {
+    let selectAno = document.getElementById('ip_ano');
+    if (!selectAno) return;
+    selectAno.innerHTML = "";
+    
+    let defaultOption = document.createElement('option');
+    defaultOption.value = "nihil";
+    defaultOption.textContent = "SELECIONE O ANO";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    selectAno.appendChild(defaultOption);
+    
+    let anoAtual = new Date().getFullYear();
+    for (anoAtual; 1990 <= anoAtual; anoAtual--) {
+        let option = document.createElement('option');
+        option.value = anoAtual;
+        option.textContent = anoAtual;
+        selectAno.appendChild(option);
+    }
+}
 
 // Função auxiliar para formatar números
 function formatarNumeroComVirgula(numero) {
