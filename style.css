@@ -22,8 +22,7 @@ fieldset {
     justify-content: left;
     align-items: left;
     margin: 0.5rem;
-    
-    border-width: 2px;
+    border-width: 3px;
     border-color: #186c4c;
 }
 
@@ -35,15 +34,15 @@ legend {
 }
 
 input, select {
-    padding: 0.5rem;
+    padding: 0.65rem;
     border-radius: 1rem;
     border-width: 1px;
     background-color: #e1ece6;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 ::placeholder{
@@ -55,7 +54,7 @@ input, select {
 
 
     label{
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: bold;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         text-decoration: none;
@@ -125,7 +124,7 @@ button:hover {
 .tldr {
     border-radius: 0px;
     padding-top: 2%;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     font-weight: bold;
     background: none !important;
     color: black;
@@ -139,7 +138,7 @@ button:hover {
     margin-bottom: 5px;
     background: none;
     color: rgb(14, 2, 2);
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 100%;
     border-style: none;

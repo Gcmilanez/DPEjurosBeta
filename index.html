@@ -110,7 +110,7 @@
     <form>
         <fieldset>
             <legend>OS JUROS DO MEU CONTRATO ESTÃO ABUSIVOS?<div style="font-size: 0.9rem; font-weight: normal; ">TESTE DE ABUSIVIDADE DE JUROS PRÉVIO AO CÁLCULO REVISIONAL</div></legend>
-            <p style="margin-top: 0px; ">
+            <p>
               <label for="ip_assistido">NOME <span class="no-print" style="font-size: 0.9rem; font-weight: normal;">(opcional para consultas)</span><br>
               </label>
               <input type="text" id="ip_assistido" placeholder="NOME COMPLETO (opcional para consultas)">
@@ -177,21 +177,21 @@
             <table width="100%" class="tabelajuros">
               <tbody class="tabelajuros">
                 <tr>
-                  <td width="20%" style="font-size: 1.5rem; text-decoration: underline;">TAXA (%)</td>
-                  <td width="20%" style= "padding-left: 3%;">CONTRATUAL</td>
-                  <td width="20%" style= "padding-left: 1%; text-align: center;">MÉDIA<br>BACEN</td>
-                  <td width="20%" style= "padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 20%</td>
-                  <td width="20%" style= "padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 50%</td>
+                  <td width="20%" style="padding-left: 1%; text-align: center; font-size: 1.5rem; text-decoration: underline;">TAXA (%)</td>
+                  <td width="20%" style= "font-size: clamp(0.65rem, 2vw, 1.3rem); font-weight: bold; padding-left: 1%; text-align: center;">CONTRATUAL</td>
+                  <td width="20%" style= "font-size: clamp(0.65rem, 2vw, 1.3rem); font-weight: bold; padding-left: 1%; text-align: center;">MÉDIA<br>BACEN</td>
+                  <td width="20%" style= "font-size: clamp(0.65rem, 2vw, 1.3rem); font-weight: bold; padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 20%</td>
+                  <td width="20%" style= "font-size: clamp(0.65rem, 2vw, 1.2rem); font-weight: bold; padding-left: 1%; text-align: center;">PARÂMETRO ABUSIVIDADE 50%</td>
                 </tr>
                 <tr>
-                  <td width="20%" style= "font-size: 1.3rem; padding-left: 0.5%;  padding-right: 5%;">ao mês</td>
+                  <td width="20%" style= "font-size: 1.3rem; text-align: center; padding-left: 0.5%;">ao mês</td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_contratual" class="contratual" placeholder="DIGITE AQUI" value = 'nihil'></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_mensal_bacen_limit50" class="banco-central-limit50" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                 </tr>
                 <tr>
-                  <td width="20%" style= "font-size: 1.3rem; padding-left: 0.5%;">ao ano</td>
+                  <td width="20%" style= "font-size: 1.3rem; text-align: center; padding-left: 0.5%;">ao ano</td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_contratual" class="contratual" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_bacen" class="banco-central" readonly placeholder="automático" style="cursor: not-allowed;"></td>
                   <td width="20%"><input type="number" id="ip_taxa_anual_bacen_limit20" class="banco-central-limit20" readonly placeholder="automático" style="cursor: not-allowed;"></td>
@@ -213,7 +213,7 @@
                   <div class="disclaimer"><B>OBS:</B> As taxas médias do Banco Central do Brasil são obtidas diretamente por esta aplicação, através de API disponibilizada SGS-BACEN na plataforma <a href="https://dadosabertos.bcb.gov.br/dataset">Dados Abertos</a>, refletindo exatamente as séries temporais acessíveis pela internet para idêntico mês de contratação e tipo de produto financeiro. Em caso de alguma discrepância, pedimos informar a cate@defensoria.rs.def.br .
                   <br><br><b> OBS2:</b> A análise jurídica da abusividade dos juros de determinado contrato deve ser aperfeiçoada por operador do Direito, servindo a presente ferramenta como mera forma de facilitar o acesso aos dados do Sistema Gerenciador de Séries Temporais do Banco Central do Brasil, diante de sua hermética interface ao público leigo. Pode haver outros fatores para além da mera abusividade quantitativa dos juros contratuais que ensejem ação revisional, devendo tal análise ser feita por profissional especializado.</div>  
         <div class="footer" >
-          <table class="footer-table">
+          <table class="footer-table" style="margin: auto;">
               <tr>
                   <td>
                       <a href="https://www.defensoria.rs.def.br" target="_blank">

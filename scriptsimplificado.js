@@ -63,6 +63,10 @@ document.getElementById('ip_cpf').addEventListener('keydown', function(event) {
     }
 });
 
+document.getElementById('ip_assistido').addEventListener('input', function(event) {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, '');
+});
+
 document.getElementById('ip_assistido').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         this.blur(); // Força o disparo do evento blur
@@ -79,6 +83,12 @@ document.getElementById('ip_refcontrato').addEventListener('keydown', function(e
 // Evento DOMContentLoaded para garantir que os elementos estão carregados
 document.addEventListener('DOMContentLoaded', () => {
     preencherSelecaoAno();
+
+    // fetch para "aquecer" o DNS
+    fetch("https://api.bcb.gov.br/dados/serie/bcdata.sgs.25478/dados?formato=json")
+        .then(() => console.log("Cache aquecido"))
+        .catch(() => console.log("Erro na pré-requisição"));
+
     // Dispara a função compararTaxas ao mudar o valor ou ao perder o foco no campo de taxa contratual
     if (TAXA_MENSAL_CONTRATUAL) {
         // Evento blur (saída do campo)
@@ -89,23 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             TAXA_MENSAL_CONTRATUAL.value = taxaMensal; // Atualiza o valor no campo
-            let taxaAnual = calcularTaxaAnualContratual(taxaMensal);
-            TAXA_ANUAL_CONTRATUAL.value = taxaAnual; // Atualiza o valor da taxa anual
+            TAXA_ANUAL_CONTRATUAL.value = ((((1 + (taxaMensal / 100)) ** 12) - 1) * 100).toFixed(2); // Atualiza o valor da taxa anual
             compararTaxas();
         });
 
         // Evento keydown para capturar Enter
         TAXA_MENSAL_CONTRATUAL.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' || event.key === 'Tab') {
                 event.preventDefault(); // Evita comportamento padrão (como envio de formulário)
-                this.blur(); // Força o disparo do evento blur
-            }
-        });
-
-        // Função de evitar enter para imprimir
-        submitButton.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Evita que o formulário seja enviado ao pressionar Enter
+                TAXA_MENSAL_CONTRATUAL.blur(); // Força o disparo do evento blur
             }
         });
 
@@ -164,14 +166,14 @@ function get_taxa(event, data){
                 // Atualizando os campos de taxas médias e limites
                 const valorTaxaMensal = filtered_data.valor;
                 TAXA_MENSAL_BACEN.value = valorTaxaMensal;
-                TAXA_ANUAL_BACEN.value = calcularTaxaAnualContratual(valorTaxaMensal);
+                TAXA_ANUAL_BACEN.value = ((((1 + (valorTaxaMensal / 100)) ** 12) - 1) * 100).toFixed(2);
                 
                 // Cálculo dos limites de 50% e 30%
                 TAXA_MENSAL_BACEN_LIMIT50.value = (valorTaxaMensal * 1.5).toFixed(2);
-                TAXA_ANUAL_BACEN_LIMIT50.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT50.value);
+                TAXA_ANUAL_BACEN_LIMIT50.value = ((((1 + (valorTaxaMensal / 100)) ** 12) - 1) * 100 * 1.5).toFixed(2);
                 
                 TAXA_MENSAL_BACEN_LIMIT20.value = (valorTaxaMensal * 1.2).toFixed(2);
-                TAXA_ANUAL_BACEN_LIMIT20.value = calcularTaxaAnualContratual(TAXA_MENSAL_BACEN_LIMIT20.value);
+                TAXA_ANUAL_BACEN_LIMIT20.value = ((((1 + (valorTaxaMensal / 100)) ** 12) - 1) * 100 * 1.2).toFixed(2);
         }
     }
 }
@@ -179,6 +181,8 @@ function get_taxa(event, data){
 // Função para mudar a modalidade
 async function mudar_modalidade(event) {
     data = '';
+    CONCLUS = '';
+    TLDR = '';
     makeFieldsImmutable();
     resetTaxa();
     
@@ -223,6 +227,7 @@ async function mudar_modalidade(event) {
         CONCLUS = `Infelizmente, os cálculos envolvendo cartão de crédito rotativo e cheque especial costumam envolver maior complexidade, conforme o número de meses em que o consumidor permaneceu em débito com a instituição financeira, de forma que não é possível fazê-lo estaticamente, isto é, pensando apenas nos juros do momento em que a pessoa não pagou a fatura ou entrou no cheque especial. Assim, esta ferramenta não serve para a funcionalidade desejada, sendo aconselhável procurar assistência jurídica para analisar a viabilidade de ação revisional.`;
         TLDR = `DESCULPE, ESTA FERRAMENTA AINDA NÃO SERVE PARA ISSO.`;
         loadingMessage.remove();
+        makeFieldsMutable();
         return;
     } 
 
