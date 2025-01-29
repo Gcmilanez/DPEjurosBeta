@@ -15,6 +15,9 @@ let TAXA_MENSAL_BACEN_LIMIT20 = document.getElementById('ip_taxa_mensal_bacen_li
 let CONCLUS = '';
 let TLDR = '';
 
+// URL do proxy no Vercel
+const PROXY_URL = "https://dpe-juros-beta.vercel.app/api/proxy";
+
 // Variavel para guardar informação do banco
 let data = '';
 
@@ -83,12 +86,6 @@ document.getElementById('ip_refcontrato').addEventListener('keydown', function(e
 // Evento DOMContentLoaded para garantir que os elementos estão carregados
 document.addEventListener('DOMContentLoaded', () => {
     preencherSelecaoAno();
-
-    // fetch para "aquecer" o DNS
-    fetch("https://api.bcb.gov.br/dados/serie/bcdata.sgs.25478/dados?formato=json")
-        .then(() => console.log("Cache aquecido"))
-        .catch(() => console.log("Erro na pré-requisição"));
-
     // Dispara a função compararTaxas ao mudar o valor ou ao perder o foco no campo de taxa contratual
     if (TAXA_MENSAL_CONTRATUAL) {
         // Evento blur (saída do campo)
@@ -233,13 +230,16 @@ async function mudar_modalidade(event) {
 
     if (MODALIDADE.value != 'nihil') {
         try {
-            let response = await fetch(`https://api.bcb.gov.br/dados/serie/bcdata.sgs.${MODALIDADE.value}/dados?formato=json`);
+            let response = await fetch(`http://localhost:3000/api/bacen/${MODALIDADE.value}`);
+            if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+            
             data = await response.json();
         } catch (err) {
-            alert(`Dados não encontrados no SGS-BACEN: ${err}`);
+            alert(`Erro ao buscar dados do BACEN: ${err.message}`);
         }
         verificarEChamarGetTaxa(event);
     }
+
     loadingMessage.remove();
     makeFieldsMutable();
 }
