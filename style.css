@@ -9,7 +9,7 @@ html, body {
     padding: 0;
     background-size: cover;
     min-height: 100vh;
-    background: linear-gradient(#ffffff, #e1ffed);
+    background: linear-gradient(#ffffff, #d4ebdd, #ffffff);
     align-items: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -46,15 +46,15 @@ input, select {
 }
 
 ::placeholder{
-    color:rgb(173, 180, 172);
+    color:rgb(134, 141, 133);
     opacity:100%;
     font-style: italic;
-    font-size: 1.0rem;
+    font-size: 1.1rem;
     }
 
 
     label{
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: bold;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         text-decoration: none;
@@ -158,6 +158,22 @@ button:hover {
     padding-left: 2%;
     padding-right: 2%;
 }
+
+.listinha {
+    font-size: 1.2rem; /* Um pouco menor do que os outros */
+    padding: 0.3rem; /* Reduzindo o preenchimento */
+    border-radius: 0.8rem; /* Ajustando a borda para manter o design */
+}
+
+.listinha::placeholder {
+    font-size: 0.8rem; /* Placeholder menor */
+    font-style: italic; /* Placeholder em itálico */
+}
+
+.logo-footer {
+    width: 100%;
+    max-width: 400px;
+}
 /* Estilos responsivos para dispositivos móveis */
 @media (max-width: 768px) {
     html, body {
@@ -198,6 +214,6 @@ button:hover {
 
     .logo-footer {
         width: 100%;
-        max-width: 150px;
+        max-width: 250px;
     }
 }
