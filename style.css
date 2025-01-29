@@ -9,7 +9,7 @@ html, body {
     padding: 0;
     background-size: cover;
     min-height: 100vh;
-    background: linear-gradient(#ffffff, #e1ffed);
+    background: linear-gradient(#ffffff, #d4ebdd, #ffffff);
     align-items: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -46,15 +46,15 @@ input, select {
 }
 
 ::placeholder{
-    color:rgb(173, 180, 172);
+    color:rgb(134, 141, 133);
     opacity:100%;
     font-style: italic;
-    font-size: 1.0rem;
+    font-size: 1.1rem;
     }
 
 
     label{
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: bold;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         text-decoration: none;
@@ -154,10 +154,45 @@ button:hover {
     color: #555555;
 }
 
-.footer{
+.footer {
     padding-left: 2%;
     padding-right: 2%;
 }
+
+.listinha {
+    font-size: 1.1rem; /* Um pouco menor do que os outros */
+    padding: 0.3rem; /* Reduzindo o preenchimento */
+    border-radius: 0.8rem; /* Ajustando a borda para manter o design */
+}
+
+.listinha::placeholder {
+    font-size: 0.8rem; /* Placeholder menor */
+    font-style: italic; /* Placeholder em itálico */
+}
+
+.listinha2 {
+    font-size: 1.04rem; /* Um pouco menor do que os outros */
+    font-weight: normal;
+    padding: 0rem; /* Reduzindo o preenchimento */
+    border-radius: 0.8rem; /* Ajustando a borda para manter o design */
+}
+
+.logo-footer {
+    width: 100%;
+    max-width: 400px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+}
+.footer-table-print {
+    display: none;
+}
+
 /* Estilos responsivos para dispositivos móveis */
 @media (max-width: 768px) {
     html, body {
@@ -198,6 +233,6 @@ button:hover {
 
     .logo-footer {
         width: 100%;
-        max-width: 150px;
+        max-width: 250px;
     }
 }
