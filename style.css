@@ -160,7 +160,7 @@ button:hover {
 }
 
 .listinha {
-    font-size: 1.2rem; /* Um pouco menor do que os outros */
+    font-size: 1.1rem; /* Um pouco menor do que os outros */
     padding: 0.3rem; /* Reduzindo o preenchimento */
     border-radius: 0.8rem; /* Ajustando a borda para manter o design */
 }
@@ -168,6 +168,13 @@ button:hover {
 .listinha::placeholder {
     font-size: 0.8rem; /* Placeholder menor */
     font-style: italic; /* Placeholder em itálico */
+}
+
+.listinha2 {
+    font-size: 1.04rem; /* Um pouco menor do que os outros */
+    font-weight: normal;
+    padding: 0rem; /* Reduzindo o preenchimento */
+    border-radius: 0.8rem; /* Ajustando a borda para manter o design */
 }
 
 .logo-footer {
